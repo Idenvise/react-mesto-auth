@@ -1,31 +1,13 @@
-import './index.css';
-
+import '../index.css';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js'
 function App() {
   return (
   <div className="page">
-      <header className="header">
-      <img className="header__logo" src="<%=require('./images/header__logo.svg')%>" alt="Место" />
-    </header>
-    <main className="content">
-      <section className="profile" aria-label="Профиль">
-        <div className="profile__avatar-wrapper">
-          <img className="profile__avatar" alt="Аватар" src="#" />
-        </div>
-        <div className="profile__info">
-          <div className="profile__name-and-button">
-            <h1 className="profile__name">Жак-Ив Кусто</h1>
-            <button className="profile__button" type="button"></button>
-          </div>
-          <p className="profile__subname">Исследователь океана</p>
-        </div>
-        <button className="profile__add-button" type="button"></button>
-      </section>
-      <section className="elements" aria-label="Галерея">
-      </section>
-    </main>
-    <footer className="footer">
-      <p className="footer__author">&copy; 2022 Mesto Russia</p>
-    </footer>
+    <Header />
+    <Main />
+    <Footer />
     <section className="popup popup-profile">
       <div className="popup__container">
         <form className="popup__form" name="popup" noValidate>
