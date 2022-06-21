@@ -1,39 +1,26 @@
 import '../index.css';
-import Header from './Header.js';
-import Main from './Main.js';
-import Footer from './Footer.js'
+import Header from './Header.jsx';
+import Main from './Main.jsx';
+import Footer from './Footer.jsx'
+import PopupWithForm from './PopupWithForm';
 function App() {
   return (
   <div className="page">
     <Header />
     <Main />
     <Footer />
-    <section className="popup popup-profile">
-      <div className="popup__container">
-        <form className="popup__form" name="popup" noValidate>
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <input className="popup__input popup__input_content_name" id="name-input" value="Жак-Ив Кусто" placeholder="Имя" type="text" name="name" minLength="2" maxLength="40" required />
-          <span className="popup__input-error name-input-error"></span>
-          <input className="popup__input popup__input_content_subname" id="subname-input" value="Исследователь океана" placeholder="О себе" type="text" name="subname" minLength="2" maxLength="200" required />
-          <span className="popup__input-error subname-input-error"></span>
-          <button className="popup__save" type="submit">Сохранить</button>
-        </form>
-        <button className="popup__close" type="button"></button>
-      </div>
-    </section>
-    <section className="popup popup-add">
-      <div className="popup__container">
-        <form className="popup__form" name="popup_add" noValidate>
-          <h2 className="popup__title">Новое место</h2>
-          <input className="popup__input popup__input_content_place" id="place-input" placeholder="Название" type="text" name="name" minLength="2" maxLength="30" required />
-          <span className="popup__input-error place-input-error"></span>
-          <input className="popup__input popup__input_content_link" id="url-input" placeholder="Ссылка на картинку" type="url" name="link" required />
-          <span className="popup__input-error url-input-error"></span>
-          <button className="popup__save" type="submit">Создать</button>
-        </form>
-        <button className="popup__close" type="button"></button>
-      </div>
-    </section>
+    <PopupWithForm name='profile' title='Редактировать профиль' buttonText='Сохранить'> 
+      <input className='popup__input popup__input_content_name' id='name-input' defaultValue="Жак-Ив Кусто" placeholder="Имя" type="text" name='popup' minLength="2" maxLength="40" required />
+      <span className='popup__input-error name-input-error'></span>
+      <input className='popup__input popup__input_content_subname' id='subname-input' defaultValue="Исследователь океана" placeholder="О себе" type="text" name='subname' minLength="2" maxLength="200" required />
+      <span className='popup__input-error subname-input-error'></span>
+    </PopupWithForm>
+    <PopupWithForm name='add' title='Новое место' buttonText='Создать'> 
+        <input className="popup__input popup__input_content_place" id="place-input" placeholder="Название" type="text" name="name" minLength="2" maxLength="30" required />
+        <span className="popup__input-error place-input-error"></span>
+        <input className="popup__input popup__input_content_link" id="url-input" placeholder="Ссылка на картинку" type="url" name="link" required />
+        <span className="popup__input-error url-input-error"></span>
+    </PopupWithForm>
     <section className="popup popup-zoom" aria-label="Увеличение картинки">
       <div className="popup__container">
         <div className="popup__zoom-img-place">
