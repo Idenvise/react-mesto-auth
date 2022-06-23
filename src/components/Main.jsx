@@ -1,9 +1,11 @@
+import api from '../utils/Api'
 function Main(props) {
+  console.log(api)
     return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
         <div className="profile__avatar-wrapper" onClick={props.onEditAvatar}>
-          <img className="profile__avatar" alt="Аватар" src="#" />
+          <img className="profile__avatar" alt="Аватар" src='' />
         </div>
         <div className="profile__info">
           <div className="profile__name-and-button">
