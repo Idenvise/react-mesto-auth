@@ -1,21 +1,18 @@
-function Main() {
-    function profileButtonClick() {
-        document.querySelector('.popup-profile').classList.add('popup_visible')
-    }
+function Main(props) {
     return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
-        <div className="profile__avatar-wrapper">
+        <div className="profile__avatar-wrapper" onClick={props.onEditAvatar}>
           <img className="profile__avatar" alt="Аватар" src="#" />
         </div>
         <div className="profile__info">
           <div className="profile__name-and-button">
             <h1 className="profile__name">Жак-Ив Кусто</h1>
-            <button className="profile__button" type="button" onClick={profileButtonClick}></button>
+            <button className="profile__button" type="button" onClick={props.onEditProfile}></button>
           </div>
           <p className="profile__subname">Исследователь океана</p>
         </div>
-        <button className="profile__add-button" type="button"></button>
+        <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements" aria-label="Галерея">
       </section>
