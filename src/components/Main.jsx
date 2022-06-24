@@ -1,6 +1,9 @@
-import api from '../utils/Api'
+import {api} from '../utils/Api.js'
+
 function Main(props) {
-  console.log(api)
+    const apiRequest = api;
+    const a = apiRequest.getProfileInfo();
+    console.log({apiRequest})
     return(
     <main className="content">
       <section className="profile" aria-label="Профиль">

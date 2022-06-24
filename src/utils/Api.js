@@ -1,9 +1,8 @@
 import { config } from "./constants"
 
 export default class Api {
-  constructor(config, profileName, profileSubname){
-    this.profileName = profileName,
-    this.profileSubname = profileSubname,
+  constructor(config){
+
     this.config = config
   }
   //Начальные карточки и данные профиля
@@ -81,3 +80,5 @@ export default class Api {
   }
 }
 export const api = new Api(config);
+console.log(api)
+
