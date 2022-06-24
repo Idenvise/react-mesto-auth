@@ -80,5 +80,4 @@ export default class Api {
   }
 }
 export const api = new Api(config);
-console.log(api)
 
