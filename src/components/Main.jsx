@@ -1,5 +1,6 @@
 import React from 'react';
 import {api} from '../utils/Api.js'
+import Card from './Card.jsx'
 
 function Main(props) {
   let [userName, setUserName] = React.useState();
@@ -10,8 +11,10 @@ function Main(props) {
     setUserDescription(res.about)
     setUserAvatar(res.avatar)
   });
-  let [cards, setCards] = React.useState([]);
-  api.getInitialCards().then(res => console.log(res))
+  let [cards, setCards] = React.useState([])
+  api.getInitialCards().then(res => {
+    res.forEach(obj => setCards([...cards, <Card card={obj} />]))
+  })
 
   return(
     <main className="content">
@@ -29,6 +32,7 @@ function Main(props) {
         <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements" aria-label="Галерея">
+        <Card />
       </section>
     </main>
   )
