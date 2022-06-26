@@ -1,25 +1,26 @@
-import React from 'react';
-import {api} from '../utils/Api.js'
+import React, { useEffect } from 'react';
+import {api} from '../utils/Api.js';
 import Card from './Card.jsx';
 
 function Main(props) {
   let [userName, setUserName] = React.useState();
   let [userDescription , setUserDescription] = React.useState();
   let [userAvatar, setUserAvatar] = React.useState();
-  let [cardsArr, setCards] = React.useState([])
+  let [cardsArr, setCardsArr] = React.useState([]);
+
   
-  Promise.all([api.getProfileInfo(), api.getInitialCards()])
+  useEffect(() => {
+    Promise.all([api.getProfileInfo(), api.getInitialCards()])
     .then(([info, cards]) => {
       setUserName(info.name)
       setUserDescription(info.about)
       setUserAvatar(info.avatar)
-    
-      cards.forEach(obj => {
-        console.log(obj)
-        setCards([...cardsArr, <Card card={obj} key={obj._id}/>])})
-    })
-    
-
+      cards.map(obj => {
+        setCardsArr([...cardsArr, <Card card={obj} key={obj._id} onCardClick={props.onCardClick} />])
+        console.log(cardsArr)
+      })
+      })}, [])
+      
   return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
