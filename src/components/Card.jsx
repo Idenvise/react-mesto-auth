@@ -1,6 +1,7 @@
 function Card(props) {
   function handleClick() {
-    props.onCardClick(props.card._id);
+    props.onCardClick(props.card);
+    console.log(props.card)
   }
     return(
         <article className="element" key={props.card._id}>

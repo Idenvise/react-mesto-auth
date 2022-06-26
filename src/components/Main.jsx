@@ -15,12 +15,10 @@ function Main(props) {
       setUserName(info.name)
       setUserDescription(info.about)
       setUserAvatar(info.avatar)
-      cards.map(obj => {
-        setCardsArr([...cardsArr, <Card card={obj} key={obj._id} onCardClick={props.onCardClick} />])
-        console.log(cardsArr)
-      })
-      })}, [])
-      
+      setCardsArr(cards)
+})
+}, [])
+  
   return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
@@ -37,7 +35,7 @@ function Main(props) {
         <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements" aria-label="Галерея">
-        {cardsArr}
+        {cardsArr.map(card => {return <Card card={card} key={card._id} onCardClick={props.onCardClick} />})}
       </section>
     </main>
   )
