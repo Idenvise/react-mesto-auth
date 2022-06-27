@@ -1,6 +1,6 @@
 .page {
   max-width: 880px;
-  width: 69.6759%;
+  width: 70%;
   margin: 0 auto;
   background-color: black;
   font-family: Inter, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -11,6 +11,7 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
+
 @media screen and (max-width: 335px) {
   .page {
     width: 100%;

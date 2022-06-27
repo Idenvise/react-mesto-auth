@@ -1,12 +1,11 @@
 function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
-    console.log(props.card)
   }
     return(
-        <article className="element" key={props.card._id}>
+        <article className="element">
           <div className="element__trash"></div>
-          <img className="element__img" src={props.card.link} alt="" onClick={handleClick}/>
+          <img className="element__img" src={props.card.link} alt={`Изображение места под названием ${props.card.name}`} onClick={handleClick}/>
           <div className="element__image-info">
             <h2 className="element__title">{props.card.name}</h2>
             <div className="element__card-info">

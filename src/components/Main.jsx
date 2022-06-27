@@ -3,10 +3,10 @@ import {api} from '../utils/Api.js';
 import Card from './Card.jsx';
 
 function Main(props) {
-  let [userName, setUserName] = React.useState();
-  let [userDescription , setUserDescription] = React.useState();
-  let [userAvatar, setUserAvatar] = React.useState();
-  let [cardsArr, setCardsArr] = React.useState([]);
+  const [userName, setUserName] = React.useState('');
+  const [userDescription , setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
+  const [cardsArr, setCardsArr] = React.useState([]);
 
   
   useEffect(() => {
@@ -16,7 +16,8 @@ function Main(props) {
       setUserDescription(info.about)
       setUserAvatar(info.avatar)
       setCardsArr(cards)
-})
+})  
+    .catch(err => console.log(err))
 }, [])
   
   return(
