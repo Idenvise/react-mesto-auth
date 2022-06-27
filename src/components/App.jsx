@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../index.css';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
@@ -20,11 +20,14 @@ function App() {
     function handleEditAvatarClick() {
       setIsEditAvatarPopupOpen(true)
     }
+  let [isPopupImageOpen, setIsPopupImageOpen] = React.useState();
+
   let [selectedCard, setSelectedCard] = React.useState();
     function handleCardClick(card) {
       setSelectedCard(card)
+      setIsPopupImageOpen(true)
     }
-
+ 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -52,7 +55,7 @@ function App() {
       <input className="popup__input popup__input_content_avatar" id="avatar-input" placeholder="Ссылка на картинку" type="url" name="avatarUrl" required />
       <span className="popup__input-error avatar-input-error"></span>
     </PopupWithForm>
-    <ImagePopup card={selectedCard} />
+    {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isPopupImageOpen} />}
     <PopupDelete />
     <template id="template__element">
       <article className="element">
