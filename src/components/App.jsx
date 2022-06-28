@@ -31,7 +31,8 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard({})
+    setIsPopupImageOpen(false);
+    setSelectedCard({});
   }
   return (
   <div className="page">

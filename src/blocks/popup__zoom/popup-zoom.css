@@ -1,4 +1,4 @@
-.popup__zoom {
+.popup-zoom {
   position: fixed;
   display: flex;
   visibility: hidden;
