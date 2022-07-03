@@ -1,42 +1,29 @@
-import React, { useEffect } from 'react';
-import {api} from '../utils/Api.js';
+import React from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import Card from './Card.jsx';
+import { CurrentCardsContext } from '../context/CurrentCardsContext.js'
 
 function Main(props) {
-  const [userName, setUserName] = React.useState('');
-  const [userDescription , setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [cardsArr, setCardsArr] = React.useState([]);
-
-  
-  useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getInitialCards()])
-    .then(([info, cards]) => {
-      setUserName(info.name)
-      setUserDescription(info.about)
-      setUserAvatar(info.avatar)
-      setCardsArr(cards)
-})  
-    .catch(err => console.log(err))
-}, [])
+  const currentCardsContext = React.useContext(CurrentCardsContext);
+  const currentUserContext = React.useContext(CurrentUserContext);
   
   return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
         <div className="profile__avatar-wrapper" onClick={props.onEditAvatar}>
-          <img className="profile__avatar" alt="Аватар" src={userAvatar} />
+          <img className="profile__avatar" alt="Аватар" src={currentUserContext && currentUserContext.avatar} />
         </div>
         <div className="profile__info">
           <div className="profile__name-and-button">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUserContext && currentUserContext.name}</h1>
             <button className="profile__button" type="button" onClick={props.onEditProfile}></button>
           </div>
-          <p className="profile__subname">{userDescription}</p>
+          <p className="profile__subname">{currentUserContext && currentUserContext.about}</p>
         </div>
         <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements" aria-label="Галерея">
-        {cardsArr.map(card => {return <Card card={card} key={card._id} onCardClick={props.onCardClick} />})}
+        {currentCardsContext && currentCardsContext.map(card => {return <Card card={card} key={card._id} onCardClick={props.onCardClick} isOwn={card.owner._id == currentUserContext._id} isLiked={card.likes.some(i => i._id === currentUserContext._id)} />})}
       </section>
     </main>
   )
