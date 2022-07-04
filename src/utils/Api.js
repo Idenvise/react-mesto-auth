@@ -47,11 +47,7 @@ export default class Api {
   setLike(cardId) {
     return fetch(`${this.config.baseUrl}/cards/${cardId}/likes`, {
     method: 'PUT',
-    headers: this.config.headers,
-    body: JSON.stringify({
-    name: this.profileName.textContent,
-    about: this.profileSubname.textContent
-  })
+    headers: this.config.headers
   }).then(res => {return this._checkResponse(res)})
   }
   unsetLike(cardId) {
