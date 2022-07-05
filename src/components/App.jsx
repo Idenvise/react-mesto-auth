@@ -7,17 +7,15 @@ import ImagePopup from './ImagePopup'
 import PopupDelete from './PopupDelete';
 import {api} from '../utils/Api.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
-import { CurrentCardsContext } from '../context/CurrentCardsContext.js'
+
 
 function App() {
   const [currentUser, setUser] = React.useState();
-  const [currentCards, setCards] = React.useState();
-
+  
   useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getInitialCards()])
-    .then(([info, cards]) => {
+    api.getProfileInfo()
+    .then(info => {
       setUser(info);
-      setCards(cards)
     })  
       .catch(err => console.log(err))
     }, [])
@@ -50,7 +48,6 @@ function App() {
     setSelectedCard({});
   }
 return (
-  <CurrentCardsContext.Provider value={currentCards}>
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header />
@@ -76,7 +73,6 @@ return (
       <PopupDelete />
     </div>
   </CurrentUserContext.Provider>
-  </CurrentCardsContext.Provider>
   );
 }
 
