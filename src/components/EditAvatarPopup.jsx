@@ -5,7 +5,7 @@ export default function EditAvatarPopup(props) {
     function handleSubmit(e) {
         e.preventDefault();
         props.onUpdateAvatar(urlAvatar.current.value)
-    } 
+    }
     return(
         <PopupWithForm name='avatar' title='Обновить аватар' buttonText='Обновить' onSubmitAvatar={handleSubmit} isOpen={props.isOpen} onClose={props.onClose}>
             <input className="popup__input popup__input_content_avatar" ref={urlAvatar} id="avatar-input" placeholder="Ссылка на картинку" type="url" name="avatarUrl" required />

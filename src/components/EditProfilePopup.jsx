@@ -24,13 +24,11 @@ export default function EditProfilePopup(props) {
     }
 
     return (
-        <div>
-            <PopupWithForm name='profile' title='Редактировать профиль' buttonText='Сохранить' handleSubmit={handleSubmit} isOpen={props.isOpen} onClose={props.onClose}> 
-                <input className='popup__input popup__input_content_name' id='name-input' onChange={handleChangeName} value={name ? name : ''}  placeholder="Имя" type="text" name='popup' minLength="2" maxLength="40" required />
-                <span className='popup__input-error name-input-error'></span>
-                <input className='popup__input popup__input_content_subname' id='subname-input' onChange={handleChangeSubname} value={description ? description : ''} placeholder="О себе" type="text" name='subname' minLength="2" maxLength="200" required />
-                <span className='popup__input-error subname-input-error'></span>
-            </PopupWithForm>
-        </div>
+        <PopupWithForm name='profile' title='Редактировать профиль' buttonText='Сохранить' handleSubmit={handleSubmit} isOpen={props.isOpen} onClose={props.onClose}> 
+            <input className='popup__input popup__input_content_name' id='name-input' onChange={handleChangeName} value={name ? name : ''}  placeholder="Имя" type="text" name='popup' minLength="2" maxLength="40" required />
+            <span className='popup__input-error name-input-error'></span>
+            <input className='popup__input popup__input_content_subname' id='subname-input' onChange={handleChangeSubname} value={description ? description : ''} placeholder="О себе" type="text" name='subname' minLength="2" maxLength="200" required />
+            <span className='popup__input-error subname-input-error'></span>
+        </PopupWithForm>
     )
 }
