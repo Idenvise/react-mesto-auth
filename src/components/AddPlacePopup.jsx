@@ -3,8 +3,8 @@ import React from "react";
 
 
 export default function AddPlacePopup(props) {
-    const [name, setName] = React.useState();
-    const [url, setUrl] = React.useState()
+    const [name, setName] = React.useState('');
+    const [url, setUrl] = React.useState('')
 
     function handleName(e) {
         setName(e.target.value)
@@ -14,7 +14,7 @@ export default function AddPlacePopup(props) {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        console.log({name, url})        
+        props.onAddPlace({name, link: url})
     }
     return(
         <PopupWithForm name={props.name} title={props.title} handleCardSubmit={handleSubmit} buttonText={props.buttonText} isOpen={props.isOpen} onClose={props.onClose}>

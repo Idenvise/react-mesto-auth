@@ -64,7 +64,7 @@ function App() {
     setSelectedCard({});
   }
   function handleUpdateUser({name, about}) {
-    api.changeProfileData(name, about).then(res => setUser(res)).catch(err => console.log(err))
+    api.changeProfileData(name, about).then(res => setUser(res)).then(()=>closeAllPopups()).catch(err => console.log(err))
   }
   function handleUpdateAvatar(url) {
     api.changeAvatar(url).then(res => setUser(res)).catch(err => console.log(err))
