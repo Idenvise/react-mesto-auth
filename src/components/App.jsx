@@ -12,8 +12,8 @@ import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
 
 function App() {
-  const [currentUser, setUser] = React.useState();
-  const [currentCards, setCards] = React.useState();
+  const [currentUser, setUser] = React.useState({});
+  const [currentCards, setCards] = React.useState([]);
 
   useEffect(() => {
   api.getInitialCards()
@@ -67,10 +67,10 @@ function App() {
     api.changeProfileData(name, about).then(res => setUser(res)).then(()=>closeAllPopups()).catch(err => console.log(err))
   }
   function handleUpdateAvatar(url) {
-    api.changeAvatar(url).then(res => setUser(res)).catch(err => console.log(err))
+    api.changeAvatar(url).then(res => setUser(res)).then(()=>closeAllPopups()).catch(err => console.log(err))
   }
   function handleAddPlace(obj) {
-    api.createCard(obj).then(card => setCards([card, ...currentCards]))
+    api.createCard(obj).then(card => setCards([card, ...currentCards])).then(()=>closeAllPopups()).catch(err => console.log(err))
 }
 
 return (
