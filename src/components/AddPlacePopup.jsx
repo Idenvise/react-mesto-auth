@@ -17,7 +17,7 @@ export default function AddPlacePopup(props) {
         props.onAddPlace({name, link: url})
     }
     return(
-        <PopupWithForm name={props.name} title={props.title} handleCardSubmit={handleSubmit} buttonText={props.buttonText} isOpen={props.isOpen} onClose={props.onClose}>
+        <PopupWithForm name={props.name} title={props.title} handleSubmit={handleSubmit} buttonText={props.buttonText} isOpen={props.isOpen} onClose={props.onClose}>
             <input className="popup__input popup__input_content_place" onChange={handleName} value={name} id="place-input" placeholder="Название" type="text" name="name" minLength="2" maxLength="30" required />
             <span className="popup__input-error place-input-error"></span>
             <input className="popup__input popup__input_content_link" onChange={handleUrl} value={url} id="url-input" placeholder="Ссылка на картинку" type="url" name="link" required />

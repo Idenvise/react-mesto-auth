@@ -22,9 +22,10 @@ function App() {
   }, [])
   
   function handleCardLike(card, isLiked) {
-    isLiked ? api.unsetLike(card._id).then(newCard => setCards(currentCards => currentCards.map(c => c._id === card._id ? newCard : c))).catch(err => console.log(err))
-            : api.setLike(card._id).then(newCard => setCards(currentCards => currentCards.map(c => c._id === card._id ? newCard : c))).catch(err => console.log(err))
+    const promise = isLiked ? api.unsetLike(card._id) : api.setLike(card._id)
+    promise.then(newCard => setCards(currentCards => currentCards.map(c => c._id === card._id ? newCard : c))).catch(err => console.log(err))
   }
+
 
   function handleCardDelete(card) {
     card.owner._id === currentUser._id && api.deleteCard(card._id).then(() => setCards(currentCard => currentCard.filter(c => !(c._id === card._id))))
@@ -82,7 +83,7 @@ return (
       <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup onAddPlace={handleAddPlace} name='add' title='Новое место' buttonText='Создать'isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} /> 
       <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
-      {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isPopupImageOpen} />}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isPopupImageOpen} />
       <PopupDelete />
     </div>
   </CurrentUserContext.Provider>

@@ -5,7 +5,6 @@ import Card from './Card.jsx';
 function Main(props) {
   const user = React.useContext(CurrentUserContext);
 
-  
   return(
     <main className="content">
       <section className="profile" aria-label="Профиль">
@@ -22,7 +21,9 @@ function Main(props) {
         <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements" aria-label="Галерея">
-        {props.cards && props.cards.map(card => {return <Card card={card} key={card._id} onCardDelete={props.onCardDelete} isLiked={card.likes.some(i => i._id === user._id)} onCardClick={props.onCardClick} onCardLike={props.onCardLike} isOwn={card.owner._id === user._id} />})}
+        {props.cards && props.cards.map(card => {
+          return(<Card card={card} key={card._id} onCardDelete={props.onCardDelete} onCardClick={props.onCardClick} onCardLike={props.onCardLike} />)})
+        }
       </section>
     </main>
   )
