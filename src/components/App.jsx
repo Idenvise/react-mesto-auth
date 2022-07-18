@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx'
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup'
 import PopupDelete from './PopupDelete';
 import {api} from '../utils/Api.js';
@@ -11,9 +11,11 @@ import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
 
+
 function App() {
   const [currentUser, setUser] = React.useState({});
   const [currentCards, setCards] = React.useState([]);
+  const [loggedIn, setLoginState] = React.useState(true);
 
   useEffect(() => {
   api.getInitialCards()
@@ -77,9 +79,22 @@ function App() {
 return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header />
-      <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
-      <Footer />
+      <Switch>
+        <Route exact path='/'>
+          <Header />
+          <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+          <Footer />
+        </Route>
+        <Route path='/sign-in'>
+
+        </Route>
+        <Route path='/sign-up'>
+
+        </Route>
+        
+        
+      </Switch>
+
       <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup onAddPlace={handleAddPlace} name='add' title='Новое место' buttonText='Создать'isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} /> 
       <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />

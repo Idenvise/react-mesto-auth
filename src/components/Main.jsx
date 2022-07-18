@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import Card from './Card.jsx';
 
