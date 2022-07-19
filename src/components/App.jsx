@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Header from './Header.jsx';
-import Main from './Main.jsx';
-import Footer from './Footer.jsx'
-import ImagePopup from './ImagePopup'
-import PopupDelete from './PopupDelete';
 import {api} from '../utils/Api.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
+import Header from './Header.jsx';
+import Main from './Main.jsx';
+import Footer from './Footer.jsx';
+import ImagePopup from './ImagePopup.jsx';
+import PopupDelete from './PopupDelete';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
@@ -15,7 +15,7 @@ import AddPlacePopup from './AddPlacePopup.jsx';
 function App() {
   const [currentUser, setUser] = React.useState({});
   const [currentCards, setCards] = React.useState([]);
-  const [loggedIn, setLoginState] = React.useState(true);
+  const [loggedIn, setLoginState] = React.useState(false);
 
   useEffect(() => {
   api.getInitialCards()
@@ -79,11 +79,10 @@ function App() {
 return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
+      <Header />
       <Switch>
         <Route exact path='/'>
-          <Header />
-          <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
-          <Footer />
+          {loggedIn ? <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} /> : <Redirect to='/sign-in' />}
         </Route>
         <Route path='/sign-in'>
 
@@ -94,6 +93,7 @@ return (
         
         
       </Switch>
+      <Footer />
 
       <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup onAddPlace={handleAddPlace} name='add' title='Новое место' buttonText='Создать'isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} /> 
