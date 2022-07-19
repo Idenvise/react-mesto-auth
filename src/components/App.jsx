@@ -15,7 +15,7 @@ import AddPlacePopup from './AddPlacePopup.jsx';
 function App() {
   const [currentUser, setUser] = React.useState({});
   const [currentCards, setCards] = React.useState([]);
-  const [loggedIn, setLoginState] = React.useState(false);
+  const [loggedIn, setLoginState] = React.useState(true);
 
   useEffect(() => {
   api.getInitialCards()

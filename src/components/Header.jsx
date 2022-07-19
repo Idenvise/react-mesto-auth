@@ -5,11 +5,17 @@ function Header() {
     <header className="header">
       <img className="header__logo" src={headerLogo} alt="Место" />
       <Switch>
-        <Route to='/sign-up'>
+        <Route path='/sign-in'>
+          <Link className="header__auth-link" to='/sign-up'>Регистрация</Link>
+        </Route>
+        <Route path='/sign-up'>
           <Link className="header__auth-link" to='/sign-in'>Войти</Link>
         </Route>
-        <Route to='/sign-in'>
-          <Link className="header__auth-link" to='/sign-up'>Регистрация</Link>
+        <Route path='/'>
+          <div className="header__auth">
+            <p className='header__user-email'>about@about.ru</p>
+            <Link className="header__auth-link" to='/sign-in'>Выйти</Link>
+          </div>
         </Route>
       </Switch>
     </header>
