@@ -8,6 +8,13 @@
 @import url(./blocks/header/__user-email/header__user-email.css);
 @import url(./blocks/header/__auth/header__auth.css);
 @import url(./blocks/content/content.css);
+@import url(./blocks/auth/auth.css);
+@import url(./blocks/auth/__input/auth__input.css);
+@import url(./blocks/auth/__title/auth__title.css);
+@import url(./blocks/auth/__submit/auth__submit.css);
+@import url(./blocks/auth/__submit-container/auth__submit-container.css);
+@import url(./blocks/auth/__to-login/auth__to-login.css);
+@import url(./blocks/auth/__login-link/auth__login-link.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar/profile__avatar.css);
 @import url(./blocks/profile/__info/profile__info.css);

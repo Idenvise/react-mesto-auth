@@ -10,7 +10,8 @@ import PopupDelete from './PopupDelete';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
-
+import Login from './Login.jsx';
+import Register from './Register.jsx';
 
 function App() {
   const [currentUser, setUser] = React.useState({});
@@ -85,10 +86,10 @@ return (
           {loggedIn ? <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} /> : <Redirect to='/sign-in' />}
         </Route>
         <Route path='/sign-in'>
-
+          <Login />
         </Route>
         <Route path='/sign-up'>
-
+          <Register />
         </Route>
         
         

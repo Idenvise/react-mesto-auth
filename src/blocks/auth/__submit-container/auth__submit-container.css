@@ -1,0 +1,12 @@
+.auth__submit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+@media screen and (max-width: 514px) {
+    .auth__submit-container {
+        margin-bottom: 106px;
+    }
+}

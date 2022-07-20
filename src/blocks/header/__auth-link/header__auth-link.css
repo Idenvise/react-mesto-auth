@@ -18,7 +18,13 @@
   
 @media screen and (max-width: 560px) {
   .header__auth-link {
-      font-size: 12px;
+      font-size: 14px;
       margin: 0;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .header__auth-link {
+      margin-right: 30px;
   }
 }
