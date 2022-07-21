@@ -12,6 +12,8 @@ import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
+import InfoTooltip from './InfoTooltip.jsx';
 
 function App() {
   const [currentUser, setUser] = React.useState({});
@@ -83,7 +85,7 @@ return (
       <Header />
       <Switch>
         <Route exact path='/'>
-          {loggedIn ? <Main cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} /> : <Redirect to='/sign-in' />}
+          <ProtectedRoute component={Main} loggedIn={loggedIn} redirectPath='/sign-in' cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
         </Route>
         <Route path='/sign-in'>
           <Login />
@@ -91,11 +93,9 @@ return (
         <Route path='/sign-up'>
           <Register />
         </Route>
-        
-        
       </Switch>
       <Footer />
-
+      <InfoTooltip />
       <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup onAddPlace={handleAddPlace} name='add' title='Новое место' buttonText='Создать'isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} /> 
       <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
