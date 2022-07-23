@@ -54,5 +54,8 @@
 @import url(./blocks/popup/_visible/popup_visible.css);
 @import url(./blocks/popup/__delete/popup__delete.css);
 @import url(./blocks/popup/__accept-request/popup__accept-reques.css);
+@import url(./blocks/popup/__info-tooltip__content/popup__info-tooltip__content.css);
+@import url(./blocks/popup/__info-tooltip/_image/popup__info-tooltip_image.css);
+@import url(./blocks/popup/__info-tooltip/_result/popup__info-tooltip_result.css);
 @import url(./blocks/show-error/show-error.css);
 @import url(./blocks/popup/__input/_invalid/popup__input_invalid.css);

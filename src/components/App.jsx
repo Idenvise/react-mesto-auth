@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter, useHistory } from 'react-router-dom';
 import {api} from '../utils/Api.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import Header from './Header.jsx';
@@ -14,11 +14,15 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import InfoTooltip from './InfoTooltip.jsx';
+import { register } from '../utils/Auth.js';
+import { login } from '../utils/Auth.js';
 
 function App() {
   const [currentUser, setUser] = React.useState({});
   const [currentCards, setCards] = React.useState([]);
   const [loggedIn, setLoginState] = React.useState(true);
+  const [email, setEmail] = React.useState('');
+  const [regResult, setRegResult] = React.useState(true)
 
   useEffect(() => {
   api.getInitialCards()
@@ -61,14 +65,17 @@ function App() {
       setSelectedCard(card)
       setIsPopupImageOpen(true)
     }
+  const [isTooltipPopupOpen, setIsTooltipPopupOpen] = React.useState(false);
  
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsPopupImageOpen(false);
+    setIsTooltipPopupOpen(false)
     setSelectedCard({});
   }
+  
   function handleUpdateUser({name, about}) {
     api.changeProfileData(name, about).then(res => setUser(res)).then(()=>closeAllPopups()).catch(err => console.log(err))
   }
@@ -78,24 +85,45 @@ function App() {
   function handleAddPlace(obj) {
     api.createCard(obj).then(card => setCards([card, ...currentCards])).then(()=>closeAllPopups()).catch(err => console.log(err))
 }
+  function submitRegister(email, password) {
+    register(email, password).then(res => {if (res.ok) {
+      setRegResult(true);
+      return res.json()}
+      else {
+      setRegResult(false)
+      return Promise.reject(`Ошибка ${res.status}`);
+      }}).catch(err => console.log(err)).finally(() => setIsTooltipPopupOpen(true))
+  }
+  
+  const hist = useHistory();
+  function submitLogin(email, password) {
+    login(email, password).then(res => {if (res.ok) {
+      return res.json()}
+      else {
+        return Promise.reject(`Ошибка ${res.status}`);
+      }}).then((res) => localStorage.setItem('token', res.token)).then(() => setLoginState(true)).then(() => setEmail(email)).then(() => hist.push('/')).catch(err => console.log(err))
+  }
 
 return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header />
+      <Header email={email} />
       <Switch>
         <Route exact path='/'>
           <ProtectedRoute component={Main} loggedIn={loggedIn} redirectPath='/sign-in' cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
         </Route>
         <Route path='/sign-in'>
-          <Login />
+          <Login onSubmit={submitLogin} />
         </Route>
         <Route path='/sign-up'>
-          <Register />
+          <Register onSubmit={submitRegister}/>
+        </Route>
+        <Route path='*'>
+          {loggedIn ? <Redirect to='/'/> : <Redirect to='/sign-in'/>}
         </Route>
       </Switch>
       <Footer />
-      <InfoTooltip />
+      <InfoTooltip onClose={closeAllPopups} isOpen={isTooltipPopupOpen} regResult={regResult} />
       <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup onAddPlace={handleAddPlace} name='add' title='Новое место' buttonText='Создать'isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} /> 
       <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
@@ -106,4 +134,4 @@ return (
   );
 }
 
-export default App;
+export default withRouter(App);
