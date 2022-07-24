@@ -10,7 +10,7 @@ export default function Login(props) {
   function handlePassword(e) {
     setPassword(e.target.value)
   }
-  function handleSubmit(e) {
+  function onLogin(e) {
     e.preventDefault();
     props.onSubmit(email, password)
   }
@@ -20,7 +20,7 @@ export default function Login(props) {
           <input className="auth__input" onChange={handleEmail} placeholder="Email" type="email" name="login" minLength="2" maxLength="30" autoComplete="on" required />
           <input className="auth__input" onChange={handlePassword} placeholder="Пароль" type="password" nampe="password" minLength="5" maxLength="30" autoComplete="on" required />
           <div className="auth__submit-container">
-            <button className="auth__submit" onClick={handleSubmit} type="submit">Войти</button>
+            <button className="auth__submit" onClick={onLogin} type="submit">Войти</button>
           </div>
         </form>
     )

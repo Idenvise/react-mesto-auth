@@ -11,7 +11,7 @@ export default function Register(props) {
   function handlePassword(e) {
     setPassword(e.target.value)
   }
-  function handleSubmit(e) {
+  function onRegister(e) {
     e.preventDefault();
     props.onSubmit(email, password)
   }
@@ -22,7 +22,7 @@ export default function Register(props) {
           <input className="auth__input" placeholder="Email" onChange={handleEmail} type="email" name="register" minLength="2" maxLength="30" autoComplete="on" required />
           <input className="auth__input" placeholder="Пароль" onChange={handlePassword} type="password" nampe="password" minLength="5" maxLength="30" autoComplete="on" required />
           <div className="auth__submit-container">
-            <button className="auth__submit" onClick={handleSubmit} type="submit">Зарегистрироваться</button>
+            <button className="auth__submit" onClick={onRegister} type="submit">Зарегистрироваться</button>
             <span className="auth__to-login">Уже зарегистрированы? <Link className="auth__login-link" to="/sign-in">Войти</Link> </span>
           </div>
         </form>

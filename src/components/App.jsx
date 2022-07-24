@@ -16,11 +16,12 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import InfoTooltip from './InfoTooltip.jsx';
 import { register } from '../utils/Auth.js';
 import { login } from '../utils/Auth.js';
+import { tokenCheck } from '../utils/Auth.js';
 
 function App() {
   const [currentUser, setUser] = React.useState({});
   const [currentCards, setCards] = React.useState([]);
-  const [loggedIn, setLoginState] = React.useState(true);
+  const [loggedIn, setLoginState] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [regResult, setRegResult] = React.useState(true)
 
@@ -104,10 +105,28 @@ function App() {
       }}).then((res) => localStorage.setItem('token', res.token)).then(() => setLoginState(true)).then(() => setEmail(email)).then(() => hist.push('/')).catch(err => console.log(err))
   }
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      requestTokenValid(localStorage.getItem('token'))
+    }
+  }, [])
+
+  function requestTokenValid(token) {
+    tokenCheck(token).then(res => {if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка ${res.status}`);
+    }}).then(res => setEmail(res.data.email)).then(() => setLoginState(true)).then(() => hist.push('/')).catch(err => console.log(err))
+  }
+
+  function signOut() {
+    localStorage.removeItem('token')
+  }
+
 return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header email={email} />
+      <Header email={email} onSignOut={signOut}/>
       <Switch>
         <Route exact path='/'>
           <ProtectedRoute component={Main} loggedIn={loggedIn} redirectPath='/sign-in' cards={currentCards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
