@@ -10,7 +10,7 @@ export const register = (email, password) => {
             "password": password,
             "email": email
         })
-    })
+    }).then(res => resCheck(res))
 }
 
 export const login = (email, password) => {
@@ -23,7 +23,7 @@ export const login = (email, password) => {
             "password": password,
             "email": email
         })
-    })
+    }).then(res => resCheck(res))
 }
 
 export const tokenCheck = (token) => {
@@ -32,5 +32,13 @@ export const tokenCheck = (token) => {
             "Content-Type": "application/json",
             "Authorization" : `Bearer ${token}`
         }
-    })
+    }).then(res => resCheck(res))
+}
+
+export const resCheck = (res) => {
+    if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка ${res.status}`);
+      }
 }

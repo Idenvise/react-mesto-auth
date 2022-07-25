@@ -14,14 +14,14 @@ export default function Login(props) {
     e.preventDefault();
     props.onSubmit(email, password)
   }
-    return(
-        <form className="auth auth__login-form" name="login-form">
-          <h2 className="auth__title">Вход</h2>
-          <input className="auth__input" onChange={handleEmail} placeholder="Email" type="email" name="login" minLength="2" maxLength="30" autoComplete="on" required />
-          <input className="auth__input" onChange={handlePassword} placeholder="Пароль" type="password" nampe="password" minLength="5" maxLength="30" autoComplete="on" required />
-          <div className="auth__submit-container">
-            <button className="auth__submit" onClick={onLogin} type="submit">Войти</button>
-          </div>
-        </form>
-    )
+  return(
+      <form className="auth auth__login-form" name="login-form">
+        <h2 className="auth__title">Вход</h2>
+        <input className="auth__input" onChange={handleEmail} placeholder="Email" type="email" name="login" minLength="2" maxLength="30" autoComplete="on" required />
+        <input className="auth__input" onChange={handlePassword} placeholder="Пароль" type="password" nampe="password" minLength="5" maxLength="30" autoComplete="on" required />
+        <div className="auth__submit-container">
+          <button className="auth__submit" onClick={onLogin} type="submit">Войти</button>
+        </div>
+      </form>
+  )
 }

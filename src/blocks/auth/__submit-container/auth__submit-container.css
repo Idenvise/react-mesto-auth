@@ -17,8 +17,3 @@
     }
 }
 
-@media screen and (max-width: 514px) {
-    .auth__submit-container {
-        margin-bottom: 106px;
-    }
-}
