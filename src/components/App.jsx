@@ -118,10 +118,12 @@ function App() {
   const hist = useHistory();
   function submitLogin(email, password) {
     login(email, password)
-      .then((res) => localStorage.setItem('token', res.token))
-      .then(() => setLoginState(true))
-      .then(() => setEmail(email))
-      .then(() => hist.push('/'))
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        setLoginState(true);
+        setEmail(email);
+        hist.push('/');
+      })
       .catch(err => console.log(err))
   } 
 
